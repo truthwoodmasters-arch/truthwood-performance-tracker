@@ -40,7 +40,7 @@ export default function BusinessAnalysis() {
     try {
       setLoading(true);
       const { data, error } = await supabase
-        .from<SaleRow>("daily_sales")
+        .from<SaleRow, SaleRow>("daily_sales") // ✅ fixed: added 2 type arguments
         .select("*");
 
       if (error) throw error;
@@ -82,7 +82,8 @@ export default function BusinessAnalysis() {
 
   // monthly aggregates for the selected year
   const months = [
-    "Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec",
+    "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
   ];
   const monthlyData = useMemo(() => {
     return months.map((m, i) => {
