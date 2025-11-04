@@ -40,8 +40,8 @@ export default function BusinessAnalysis() {
     try {
       setLoading(true);
       const { data, error } = await supabase
-        .from<SaleRow, SaleRow>("daily_sales") // ✅ fixed: added 2 type arguments
-        .select("*");
+  .from("daily_sales")
+  .select("*");
 
       if (error) throw error;
       setSales(data || []);
